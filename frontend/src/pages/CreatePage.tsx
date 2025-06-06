@@ -46,10 +46,9 @@ export const CreatePage = () => {
           <Input
             required
             placeholder="Add link"
-            variant="standard"
             fullWidth
             style={{ maxWidth: 500 }}
-            {...register('link', { require: true })}
+            {...register('link', { required: true })}
           />
           <Button
             style={{

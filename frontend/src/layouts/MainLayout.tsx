@@ -1,6 +1,12 @@
 import { Box, LinearProgress } from '@mui/material';
 
-export const MainLayout = ({ children, style, loading }) => {
+type Props = {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+  loading?: boolean;
+};
+
+export const MainLayout = ({ children, style, loading }: Props) => {
   return (
     <>
       {loading ? <LinearProgress /> : <Box mt="4px"></Box>}

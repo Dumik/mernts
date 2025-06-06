@@ -24,7 +24,6 @@ export const AuthPage = () => {
     >
       <Box
         maxWidth={500}
-        mixWidth={400}
         minHeight={500}
         sx={{
           background: '#fff',

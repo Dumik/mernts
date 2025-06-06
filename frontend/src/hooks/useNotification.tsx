@@ -1,10 +1,18 @@
 import { useCallback } from 'react';
 import { useSnackbar } from 'notistack';
 
+type Variant = 'default' | 'error' | 'info' | 'success' | 'warning';
+
+type Notification = {
+      message?: string;
+      error?: string;
+      variant?: Variant;
+    }
+
 export const useNotification = () => {
   const { enqueueSnackbar } = useSnackbar();
   return useCallback(
-    ({ message, error, variant = 'error' }) => {
+    ({ message, error, variant = 'error' }: Notification) => {
       if (error) {
         enqueueSnackbar(error, {
           variant: 'error',

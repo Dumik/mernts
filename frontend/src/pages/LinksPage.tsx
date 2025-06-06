@@ -15,7 +15,12 @@ import { DETAILS } from 'routes';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { DeleteLinkDialogs } from 'components';
 
-const columns = [
+const columns: {
+  id: string;
+  label: string;
+  maxWidth: string;
+  align?: "right" | "left" | "center" | "inherit" | "justify";
+}[] = [
   { id: 'index', label: '№', maxWidth: '10%' },
   {
     id: 'title',
@@ -50,7 +55,7 @@ export const LinksPage = () => {
   const [links, setLinks] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<number | null>(null);
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value);
     setPage(0);

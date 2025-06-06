@@ -1,7 +1,10 @@
-import React from 'react';
 import { SnackbarProvider } from 'notistack';
 
-export const SnackBar = ({ children, classes }) => (
+type Props = {
+  children: React.ReactNode;
+};
+
+export const SnackBar = ({ children }: Props ) => (
   <SnackbarProvider maxSnack={3} autoHideDuration={2500}>
     {children}
   </SnackbarProvider>

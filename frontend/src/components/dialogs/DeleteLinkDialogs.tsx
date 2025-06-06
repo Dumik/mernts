@@ -49,7 +49,15 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export const DeleteLinkDialogs = ({ open, setOpen, linkTitle, linkId, getLink }) => {
+type DeleteLinkDialogsProps = {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<number | null>>;
+  linkTitle: string;
+  linkId: string;
+  getLink: () => void;
+};
+
+export const DeleteLinkDialogs = ({ open, setOpen, linkTitle, linkId, getLink }: DeleteLinkDialogsProps) => {
   const { token } = useContext(AuthContext);
   const showNotification = useNotification();
   const { request } = useHttp();
@@ -63,7 +71,7 @@ export const DeleteLinkDialogs = ({ open, setOpen, linkTitle, linkId, getLink })
 
         if (data.success) {
           getLink();
-          setOpen(false);
+          setOpen(null);
           showNotification({ message: data.message, variant: 'success' });
         }
       } catch (error) {
@@ -74,12 +82,12 @@ export const DeleteLinkDialogs = ({ open, setOpen, linkTitle, linkId, getLink })
   );
 
   const handleClose = () => {
-    setOpen(false);
+    setOpen(null);
   };
 
   return (
     <BootstrapDialog
-      fullWidth="sm"
+      fullWidth
       maxWidth="sm"
       onClose={handleClose}
       aria-labelledby="customized-dialog-title"

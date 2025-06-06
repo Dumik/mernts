@@ -42,7 +42,7 @@ export const SignInForm = () => {
           variant="standard"
           type="email"
           fullWidth
-          {...register('email', { require: true })}
+          {...register('email', { required: true })}
         />
       </Box>
       <Box mt={4} px={2}>
@@ -53,7 +53,7 @@ export const SignInForm = () => {
           autoComplete="current-password"
           variant="standard"
           fullWidth
-          {...register('password', { require: true, min: 8 })}
+          {...register('password', { required: true, min: 8 })}
         />
       </Box>
       <Box mt={1} px={2}>

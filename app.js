@@ -1,6 +1,7 @@
-const config = require('config');
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const app = express();
 
@@ -18,15 +19,19 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const PORT = config.get('port') || 8000;
+const PORT = process.env.PORT || 8000;
+
 const start = async () => {
   try {
-    await mongoose.connect(config.get('mongoUri'), {
+    await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    app.listen(PORT, () => console.log('%c jordan PORT', 'color: lime', PORT));
+    app.listen(PORT, () =>
+      console.log('%c Server running on PORT:', PORT)
+    );
   } catch (error) {
+    console.error('Server error:', error.message);
     process.exit(1);
   }
 };

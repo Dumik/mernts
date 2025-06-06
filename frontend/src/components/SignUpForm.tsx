@@ -5,13 +5,18 @@ import { useHttp, useNotification } from '../hooks';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 export const SignUpForm = () => {
-  const formSchema = Yup.object().shape({
-    password: Yup.string().required('Password is mendatory').min(3, 'Password must be at 3 char long'),
-    passwordConfirm: Yup.string()
-      .required('Password is mendatory')
-      .oneOf([Yup.ref('password')], 'Passwords does not match'),
-  });
-  const formOptions = { resolver: yupResolver(formSchema) };
+
+  //TODO: Fix types
+const formSchema: any = Yup.object({
+  password: Yup.string()
+    .required('Password is mandatory')
+    .min(3, 'Password must be at least 3 characters long'),
+  passwordConfirm: Yup.string()
+    .required('Password confirmation is mandatory')
+    .oneOf([Yup.ref('password')], 'Passwords do not match'),
+});
+
+const formOptions = { resolver: yupResolver(formSchema) };
 
   const showNotification = useNotification();
   const { request, error } = useHttp();
@@ -52,7 +57,7 @@ export const SignUpForm = () => {
           type="email"
           fullWidth
           error={errors['email'] ? errors['email'].message : ''}
-          {...register('email', { require: true })}
+          {...register('email', { required: true })}
         />
       </Box>
       <Box mt={4} px={2}>
@@ -65,7 +70,7 @@ export const SignUpForm = () => {
           variant="standard"
           fullWidth
           error={errors['password'] ? errors['password'].message : ''}
-          {...register('password', { require: true, min: 8 })}
+          {...register('password', { required: true, min: 8 })}
         />
       </Box>
       <Box mt={4} px={2}>
@@ -78,7 +83,7 @@ export const SignUpForm = () => {
           variant="standard"
           fullWidth
           error={errors['passwordConfirm'] ? errors['passwordConfirm'].message : ''}
-          {...register('passwordConfirm', { require: true, min: 8 })}
+          {...register('passwordConfirm', { required: true, min: 8 })}
         />
       </Box>
       <Box mt={4} px={2}>
